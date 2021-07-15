@@ -2,20 +2,24 @@ import heartOutline from "../assets/heart-outline.png";
 import heartFill from "../assets/heart-fill.png";
 import "./Cards.css";
 import { Link } from "react-router-dom";
-import {useState} from "react";
+import React, {useState,useEffect} from "react";
 
 
 function Card(props) {
 
   const [isLiked, setIsLiked] = useState(false);
-
+  const id = props.id;
+  useEffect(() => {
+    if (localStorage.getItem(id) === 'liked') {
+      setIsLiked(true)
+    }  
+  }, [])
   const handleLike = (e) => {
     e.preventDefault();
-    const id = props.id;
 
     if(isLiked === false) {
 
-      localStorage.setItem(id , "liked")
+      localStorage.setItem(id , 'liked')
       setIsLiked(true)
     } else {
 
