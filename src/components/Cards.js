@@ -10,7 +10,7 @@ function Card(props) {
   const [isLiked, setIsLiked] = useState(false);
   const id = props.id;
   useEffect(() => {
-    if (localStorage.getItem(id) === 'liked') {
+    if (localStorage.getItem(id) === id) {
       setIsLiked(true)
     }  
   }, [])
@@ -19,7 +19,7 @@ function Card(props) {
 
     if(isLiked === false) {
 
-      localStorage.setItem(id , 'liked')
+      localStorage.setItem(id , id)
       setIsLiked(true)
     } else {
 
