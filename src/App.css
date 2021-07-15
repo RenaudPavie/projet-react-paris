@@ -1,18 +1,24 @@
-.App {
-  text-align: center;
-}
-
 .App-header {
-  background-color: #282c34;
-  height: 80px;
+  background-color: #344269;
+  height: 70px;
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
   font-size: calc(10px + 2vmin);
-  color: white;
+  padding-left: 10%;
 }
-
-.App-link {
-  color: #61dafb;
+.App-header a {
+  color: #fff;
+  margin-right: 15px;
+  position: relative;
+  font-weight: 400;
+  font-size: 1.5rem;
 }
-
+.selected::after {
+  content:"";
+  background-color: #fff;
+  height: 2px;
+  width: 100%;
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+}

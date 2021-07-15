@@ -1,59 +1,77 @@
 .row-card {
     display: flex;
-    width: 80%;
-    margin: auto;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: flex-start;
+}
+.colCard {
+	width: 33%;
 }
 .card {
-    display: block;
 	background-color: white;
 	color: #272727;
-	padding: 20px;
+	padding: 10px;
 	border-radius: 10px;
-	border: 3px solid darkred;
+	border:1px solid;
+	border-color: lightgray;
+	box-shadow: 2px 2px 5px #24242480;
 	transition: 200ms;
-    max-width: 380px;
+    width: 300px;
+	/* height: 400px; */
     cursor: pointer;
+	margin-bottom: 15px;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: space-between;
 }
 .card:hover {
 	transition: 200ms;
-	border-color: red;
+	transform: scale(1.01);
+	border-color: #35509b;
 }
 .card-header {
 	display: flex;
-	flex-wrap: nowrap;
-	align-items: center;
-
-}
-.card-title-group {
-	justify-content: center;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: flex-start;
 }
 .card-title {
-	flex: 0.5;
-	font-size: large;
-	margin-bottom: 0;
-	margin-top: 0;
+	font-size: 1.2rem;
+	margin: 0;
 }
 .card-date {
-	flex: 0.3;
-	font-size: small;
 	margin-top: 0;
+	font-size: 0.9rem;
 }
 .card-image {
-	border-radius: 10px;
+	border-radius: 5px;
 	margin-bottom: 10px;
 	margin-top: 10px;
-    max-width: 100%;
+    width: 100%;
+	max-height: 200px;
+	object-fit: cover;
+	object-position: top;
+}
+.card-text {
+	width: 100%;
+	font-size: 16px;
 }
 .card-like-icon {
 	height: 25px;
 }
-.card-text {
-	width: 350px;
-	font-size: medium;
+.card-like-icon.empty:hover {
+	background-image: url('../assets/heart-fill.png');
+	background-size: 100%;
 }
 .card-like-bar {
 	display: flex;
 	align-items: center;
 	margin-top: 20px;
 	justify-content: space-between;
+}
+.card-like-bar button {
+	background-color: inherit;
+	border:none;
+	cursor: pointer;
 }
