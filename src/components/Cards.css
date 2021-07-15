@@ -1,0 +1,59 @@
+.row-card {
+    display: flex;
+    width: 80%;
+    margin: auto;
+}
+.card {
+    display: block;
+	background-color: white;
+	color: #272727;
+	padding: 20px;
+	border-radius: 10px;
+	border: 3px solid darkred;
+	transition: 200ms;
+    max-width: 380px;
+    cursor: pointer;
+}
+.card:hover {
+	transition: 200ms;
+	border-color: red;
+}
+.card-header {
+	display: flex;
+	flex-wrap: nowrap;
+	align-items: center;
+
+}
+.card-title-group {
+	justify-content: center;
+}
+.card-title {
+	flex: 0.5;
+	font-size: large;
+	margin-bottom: 0;
+	margin-top: 0;
+}
+.card-date {
+	flex: 0.3;
+	font-size: small;
+	margin-top: 0;
+}
+.card-image {
+	border-radius: 10px;
+	margin-bottom: 10px;
+	margin-top: 10px;
+    max-width: 100%;
+}
+.card-like-icon {
+	height: 25px;
+}
+.card-text {
+	width: 350px;
+	font-size: medium;
+}
+.card-like-bar {
+	display: flex;
+	align-items: center;
+	margin-top: 20px;
+	justify-content: space-between;
+}
