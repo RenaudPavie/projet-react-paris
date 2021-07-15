@@ -5,21 +5,17 @@ function Accueil() {
 
   const [error, setError] = useState(null);
   const [items, setItems] = useState([]);
-  const [isLiked, setIsLiked] = useState(false);
     
   useEffect(() => {
     fetch("https://opendata.paris.fr/api/v2/catalog/datasets/que-faire-a-paris-/records?sort=-date_start&limit=1")
     .then((res) => res.json())
-    .then((data) => {
-        setItems(data.records);
-        console.log(data)
-    },
+    .then((data) => setItems(data.records),
     (error) => {setError(error)}
     );
   }, []);
 
   return (
-    <div>
+    <div className="container">
       <h1>Bienvenue sur Paris Events</h1>
       <p>
         L'application qui permet de rechercher en direct les prochains
@@ -36,7 +32,6 @@ function Accueil() {
                 alt={item.record.fields.cover_alt}
                 date={item.record.fields.date_start}
                 description={item.record.fields.lead_text}
-                liked={isLiked}
             />
             )
         )}
