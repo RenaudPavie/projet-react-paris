@@ -3,13 +3,13 @@ import { useParams } from "react-router-dom";
 import heartOutline from "../assets/heart-outline.png";
 import heartFill from "../assets/heart-fill.png";
 
-const idList = JSON.parse(localStorage.getItem("LikedEvents"));
+const idList = [];
 
 function Event() {
     const params = useParams();
     const [event, setEvent] = useState(null);
     const [isLiked, setIsLiked] = useState(false);
-
+    const storedList = JSON.parse(localStorage.getItem("LikedEvents")) || [];
     useEffect(() => {
         fetch(
             `https://opendata.paris.fr/api/v2/catalog/datasets/que-faire-a-paris-/records/${params.id}`
@@ -17,7 +17,7 @@ function Event() {
             .then((res) => res.json())
             .then((data) => setEvent(data));
 
-        if (JSON.parse(localStorage.getItem("LikedEvents")).includes(params.id)) {
+        if (storedList.includes(params.id)) {
             setIsLiked(true);
         }
     }, [params.id]);

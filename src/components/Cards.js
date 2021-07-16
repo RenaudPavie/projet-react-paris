@@ -9,8 +9,9 @@ const idList = [];
 function Card(props) {
   const [isLiked, setIsLiked] = useState(false);
   const id = props.id;
+  const test = JSON.parse(localStorage.getItem("LikedEvents")) || []
   useEffect(() => {
-    if (JSON.parse(localStorage.getItem("LikedEvents")).includes(id)) {
+    if (test.includes(id)) {
       setIsLiked(true);
     }
   }, [id]);

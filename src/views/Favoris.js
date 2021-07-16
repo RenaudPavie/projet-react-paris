@@ -6,7 +6,7 @@ function Favoris() {
 
     useEffect(() => {
         
-        const idList = JSON.parse(localStorage.getItem(localStorage.key('LikedEvents')));
+        const idList = JSON.parse(localStorage.getItem(localStorage.key('LikedEvents'))) || [];
         idList.forEach(id => {
             fetch(`https://opendata.paris.fr/api/v2/catalog/datasets/que-faire-a-paris-/records/${id}`)
             .then((res) => res.json())
