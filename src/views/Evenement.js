@@ -1,32 +1,73 @@
-import React, { useState, useEffect } from "react"
-import { useParams } from "react-router-dom"
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import heartOutline from "../assets/heart-outline.png";
+import heartFill from "../assets/heart-fill.png";
+
+const idList = JSON.parse(localStorage.getItem("LikedEvents"));
 
 function Event() {
-
     const params = useParams();
-    const [event,setEvent] = useState(null)
+    const [event, setEvent] = useState(null);
+    const [isLiked, setIsLiked] = useState(false);
 
     useEffect(() => {
-        fetch(`https://opendata.paris.fr/api/v2/catalog/datasets/que-faire-a-paris-/records/${params.id}`)
-        .then((res) => res.json())
-        .then((data) => setEvent(data));
+        fetch(
+            `https://opendata.paris.fr/api/v2/catalog/datasets/que-faire-a-paris-/records/${params.id}`
+        )
+            .then((res) => res.json())
+            .then((data) => setEvent(data));
+
+        if (JSON.parse(localStorage.getItem("LikedEvents")).includes(params.id)) {
+            setIsLiked(true);
+        }
     }, [params.id]);
-    
+
+    const handleLike = (e) => {
+        e.preventDefault();
+        if (isLiked === false && !idList.includes(params.id)) {
+            idList.push(params.id);
+            localStorage.setItem("LikedEvents", JSON.stringify(idList));
+            setIsLiked(true);
+        } else {
+            idList.splice(idList.indexOf(params.id), 1);
+            const newIdList = JSON.parse(localStorage.getItem("LikedEvents"));
+            newIdList.splice(newIdList.indexOf(params.id), 1);
+            localStorage.setItem("LikedEvents", JSON.stringify(newIdList));
+            setIsLiked(false);
+        }
+    };
+
     return (
         <div className="container">
-            {event && 
+            {event && (
                 <div>
+                    {isLiked ? (
+                        <button className="likeBtn" onClick={(e) => handleLike(e)}>
+                            <img className="card-like-icon" src={heartFill} alt="Logo" />
+                        </button>
+                    ) : (
+                        <button className="likeBtn" onClick={(e) => handleLike(e)}>
+                            <img
+                                className="card-like-icon empty"
+                                src={heartOutline}
+                                alt="Logo"
+                            />
+                        </button>
+                    )}
                     <h1>{event.record.fields.title}</h1>
                     <div>
-                        <img src={event.record.fields.cover.url} alt={event.record.fields.cover_alt} />
+                        <img
+                            src={event.record.fields.cover.url}
+                            alt={event.record.fields.cover_alt}
+                        />
                         <p>{event.record.fields.description}</p>
                     </div>
                     <p>{event.record.fields.date_description}</p>
                     <p>{event.record.fields.price_detail}</p>
                     <p>
-                        {event.record.fields.address_name}, 
+                        {event.record.fields.address_name},
                         {event.record.fields.address_street}
-                        {event.record.fields.address_zipcode}, 
+                        {event.record.fields.address_zipcode},
                         {event.record.fields.address_city}
                     </p>
                     <p>{event.record.fields.transport}</p>
@@ -36,9 +77,9 @@ function Event() {
                     <p>{event.record.fields.contact_twitter}</p>
                     <p>{event.record.fields.contact_url}</p>
                 </div>
-            }
+            )}
         </div>
-    )
+    );
 }
 
-export default Event
+export default Event;

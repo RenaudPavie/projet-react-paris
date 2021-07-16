@@ -5,12 +5,19 @@ function Favoris() {
     const [items, setItems] = useState([]);
 
     useEffect(() => {
-        for ( var i = 0, len = localStorage.length; i < len; ++i ) {
-            const test = localStorage.getItem(localStorage.key(i));
-            fetch(`https://opendata.paris.fr/api/v2/catalog/datasets/que-faire-a-paris-/records/${test}`)
+        
+        const idList = JSON.parse(localStorage.getItem(localStorage.key('LikedEvents')));
+        idList.forEach(id => {
+            fetch(`https://opendata.paris.fr/api/v2/catalog/datasets/que-faire-a-paris-/records/${id}`)
             .then((res) => res.json())
             .then((data) => setItems(items => [...items, data.record]));
-        }
+        });
+        // for ( var i = 0, len = localStorage.length; i < len; ++i ) {
+        //     const test = localStorage.getItem(localStorage.key(i));
+        //     fetch(`https://opendata.paris.fr/api/v2/catalog/datasets/que-faire-a-paris-/records/${test}`)
+        //     .then((res) => res.json())
+        //     .then((data) => setItems(items => [...items, data.record]));
+        // }
     }, []);
 
     return (
