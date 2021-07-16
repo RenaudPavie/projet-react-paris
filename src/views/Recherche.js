@@ -15,7 +15,7 @@ function Recherche() {
 
     return (
         <div className="container">
-            <h1>Rechercher un événement</h1>
+            <h1 className="title">Rechercher un événement</h1>
             <div className="search">
                 <form onSubmit={SearchInDatabase}>
                     <input type="text" onChange={e => setSearchText(e.target.value)} />
@@ -23,7 +23,7 @@ function Recherche() {
                 </form>
             </div>
 
-            <h2>Evenements :</h2>
+            <h2 className="title">Evenements</h2>
             <div className="row-card">    
                     {items.map((item, index) => ( 
                         <Card key={index}

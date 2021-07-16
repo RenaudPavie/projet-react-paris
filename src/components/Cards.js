@@ -9,9 +9,10 @@ const idList = [];
 function Card(props) {
   const [isLiked, setIsLiked] = useState(false);
   const id = props.id;
-  const test = JSON.parse(localStorage.getItem("LikedEvents")) || []
+  
   useEffect(() => {
-    if (test.includes(id)) {
+    const storedList = JSON.parse(localStorage.getItem("LikedEvents")) || [];
+    if (storedList.includes(id)) {
       setIsLiked(true);
     }
   }, [id]);
@@ -34,26 +35,26 @@ function Card(props) {
   return (
     <Link to={"event/" + props.id}>
       <div className="card">
-        <div className="card-header">
-          <h5 className="card-title">{props.title}</h5>
-          <div className="card-date">{props.date}</div>
-        </div>
         <img className="card-image" src={props.img} alt={props.alt} />
-        <div className="card-text">{props.description}</div>
-        <div className="card-like-bar">
-          {isLiked ? (
-            <button className="likeBtn" onClick={(e) => handleLike(e)}>
-              <img className="card-like-icon" src={heartFill} alt="Logo" />
-            </button>
-          ) : (
-            <button className="likeBtn" onClick={(e) => handleLike(e)}>
-              <img
-                className="card-like-icon empty"
-                src={heartOutline}
-                alt="Logo"
-              />
-            </button>
-          )}
+        <div className="card-content">
+          <div className="card-header">
+            <h5 className="card-title">{props.title}</h5>
+            {isLiked ? (
+              <button className="likeBtn" onClick={(e) => handleLike(e)}>
+                <img className="card-like-icon" src={heartFill} alt="Logo" />
+              </button>
+            ) : (
+              <button className="likeBtn" onClick={(e) => handleLike(e)}>
+                <img
+                  className="card-like-icon empty"
+                  src={heartOutline}
+                  alt="Logo"
+                />
+              </button>
+            )}
+          </div>
+          <div className="card-date">{props.date}</div>
+          <div className="card-text">{props.description.replace(/(<([^>]+)>)/gi, "")}</div>
         </div>
       </div>
     </Link>

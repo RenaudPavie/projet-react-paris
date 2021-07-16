@@ -1,61 +1,64 @@
 .row-card {
     display: flex;
 	flex-wrap: wrap;
-	justify-content: space-between;
+	justify-content: space-evenly;
 	align-items: flex-start;
 }
 .colCard {
 	width: 33%;
 }
 .card {
+    max-width: 300px;
 	background-color: white;
 	color: #272727;
-	padding: 10px;
-	border-radius: 10px;
-	border:1px solid;
-	border-color: lightgray;
+	margin:15px;
 	box-shadow: 2px 2px 5px #24242480;
-	transition: 200ms;
-    width: 300px;
-	/* height: 400px; */
     cursor: pointer;
-	margin-bottom: 15px;
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
 	justify-content: space-between;
+	transition: 200ms;
+	display: block;
+	
 }
 .card:hover {
 	transition: 200ms;
-	transform: scale(1.01);
+	transform: scale(1.025);
 	border-color: #35509b;
 }
+.card-content {
+	max-width: 100%;
+	padding:15px;
+}
 .card-header {
+	width: 100%;
 	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-	justify-content: flex-start;
+	align-items: center;
+	justify-content: space-between;
 }
 .card-title {
 	font-size: 1.2rem;
+	max-width: 80%;
 	margin: 0;
+	margin-bottom: 15px;
 }
 .card-date {
 	margin-top: 0;
 	font-size: 0.9rem;
 }
 .card-image {
-	border-radius: 5px;
-	margin-bottom: 10px;
-	margin-top: 10px;
     width: 100%;
-	max-height: 200px;
+	height: 200px;
 	object-fit: cover;
 	object-position: top;
 }
 .card-text {
 	width: 100%;
+	height: 65px;
 	font-size: 16px;
+	overflow: hidden;
+	margin: 20px 0;
 }
 .card-like-icon {
 	height: 25px;
