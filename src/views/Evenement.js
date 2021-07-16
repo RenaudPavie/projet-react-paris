@@ -11,12 +11,11 @@ function Event() {
     const [isLiked, setIsLiked] = useState(false);
     const storedList = JSON.parse(localStorage.getItem("LikedEvents")) || [];
     useEffect(() => {
-        fetch(
-            `https://opendata.paris.fr/api/v2/catalog/datasets/que-faire-a-paris-/records/${params.id}`
-        )
-            .then((res) => res.json())
-            .then((data) => setEvent(data));
+        fetch(`https://opendata.paris.fr/api/v2/catalog/datasets/que-faire-a-paris-/records/${params.id}`)
+        .then((res) => res.json())
+        .then((data) => setEvent(data));
 
+        // check if the current event is already liked and in localStorage
         if (storedList.includes(params.id)) {
             setIsLiked(true);
         }
@@ -30,9 +29,8 @@ function Event() {
             setIsLiked(true);
         } else {
             idList.splice(idList.indexOf(params.id), 1);
-            const newIdList = JSON.parse(localStorage.getItem("LikedEvents"));
-            newIdList.splice(newIdList.indexOf(params.id), 1);
-            localStorage.setItem("LikedEvents", JSON.stringify(newIdList));
+            storedList.splice(storedList.indexOf(params.id), 1);
+            localStorage.setItem("LikedEvents", JSON.stringify(storedList));
             setIsLiked(false);
         }
     };
