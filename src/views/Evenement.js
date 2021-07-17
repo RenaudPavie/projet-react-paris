@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams,Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import LikeBtn from "../components/Btn/LikeBtn";
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 
