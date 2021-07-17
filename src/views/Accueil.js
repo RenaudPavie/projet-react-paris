@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Card from '../components/Cards'
+import Card from '../components/Cards/Cards'
 
 function Accueil() {
 

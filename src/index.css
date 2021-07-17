@@ -24,7 +24,11 @@ a {
     padding-right: 5px;
   }
 }
-
+.likeBtn {
+	background-color: inherit;
+	border:none;
+	cursor: pointer;
+}
 .title {
   color:#2c313f;
   text-transform: uppercase;
@@ -94,7 +98,7 @@ h2.title::after {
   background-color: #a77f4c30;
 }
 .eventHeader {
-  width: calc(70% - 15px);
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;

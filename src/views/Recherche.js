@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Card from '../components/Cards'
+import Card from '../components/Cards/Cards'
 
 function Recherche() {
 

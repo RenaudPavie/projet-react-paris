@@ -1,39 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import heartOutline from "../assets/heart-outline.png";
-import heartFill from "../assets/heart-fill.png";
-
-const idList = [];
+import LikeBtn from "../components/Btn/LikeBtn";
 
 function Event() {
     const params = useParams();
+    const id = params.id;
     const [event, setEvent] = useState(null);
-    const [isLiked, setIsLiked] = useState(false);
+
     useEffect(() => {
-        fetch(`https://opendata.paris.fr/api/v2/catalog/datasets/que-faire-a-paris-/records/${params.id}`)
+        fetch(`https://opendata.paris.fr/api/v2/catalog/datasets/que-faire-a-paris-/records/${id}`)
         .then((res) => res.json())
         .then((data) => setEvent(data));
-        // check if the current event is already liked and in localStorage
-        const storedList = JSON.parse(localStorage.getItem("LikedEvents")) || [];
-        if (storedList.includes(params.id)) {
-            setIsLiked(true);
-        } 
-    }, [params.id]);
-
-    const handleLike = (e) => {
-        e.preventDefault();
-        if (isLiked === false && !idList.includes(params.id)) {
-            idList.push(params.id);
-            localStorage.setItem("LikedEvents", JSON.stringify(idList));
-            setIsLiked(true);
-        } else {
-            idList.splice(idList.indexOf(params.id), 1);
-            const newIdList = JSON.parse(localStorage.getItem("LikedEvents"));
-            newIdList.splice(newIdList.indexOf(params.id), 1);
-            localStorage.setItem("LikedEvents", JSON.stringify(newIdList));
-            setIsLiked(false);
-        }
-    };
+    }, [id]);
 
     return (
         <div className="container">
@@ -41,19 +19,7 @@ function Event() {
                 <div>
                     <div className="eventHeader">    
                         <h1 className="title">{event.record.fields.title}</h1>
-                        {isLiked ? (
-                            <button className="likeBtn" onClick={(e) => handleLike(e)}>
-                                <img className="card-like-icon" src={heartFill} alt="Logo" />
-                            </button>
-                        ) : (
-                            <button className="likeBtn" onClick={(e) => handleLike(e)}>
-                                <img
-                                    className="card-like-icon empty"
-                                    src={heartOutline}
-                                    alt="Logo"
-                                />
-                            </button>
-                        )}
+                        <LikeBtn id={params.id}/>
                     </div>
                     <div className="eventRow">
                         <div className="left">
@@ -70,10 +36,13 @@ function Event() {
                                 <h3>Date</h3>
                                 <p>{event.record.fields.date_description}</p>
                             </div>
-                            <div className="box">
-                                <h3>Prix</h3>
-                                <p>{event.record.fields.price_detail}</p>
-                            </div>
+                            
+                            {event.record.fields.price_detail && (
+                                <div className="box">
+                                    <h3>Prix</h3>
+                                    <p>{event.record.fields.price_detail}</p>
+                                </div>
+                            )}
                             <div className="box">
                                 <h3>Adresse</h3>
                                 <p>{event.record.fields.address_name}, {event.record.fields.address_street} {event.record.fields.address_zipcode}, {event.record.fields.address_city}</p>
