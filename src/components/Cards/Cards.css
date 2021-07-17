@@ -60,13 +60,6 @@
 	overflow: hidden;
 	margin: 20px 0;
 }
-.card-like-icon {
-	height: 30px;
-}
-.card-like-icon.empty:hover {
-	background-image: url('../../assets/heart-fill.png');
-	background-size: 100%;
-}
 .card-like-bar {
 	display: flex;
 	align-items: center;

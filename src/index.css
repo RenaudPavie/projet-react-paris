@@ -24,11 +24,6 @@ a {
     padding-right: 5px;
   }
 }
-.likeBtn {
-	background-color: inherit;
-	border:none;
-	cursor: pointer;
-}
 .title {
   color:#2c313f;
   text-transform: uppercase;

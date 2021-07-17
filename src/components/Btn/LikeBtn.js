@@ -1,6 +1,7 @@
 import heartOutline from "../../assets/heart-outline.png";
 import heartFill from "../../assets/heart-fill.png";
 import React, { useState, useEffect } from "react";
+import './LikeBtn.css'
 
 const idList = JSON.parse(localStorage.getItem("LikedEvents")) || [];
 
@@ -30,11 +31,11 @@ function LikeBtn(props) {
         <div>
             {isLiked ? (
               <button className="likeBtn" onClick={(e) => handleLike(e)}>
-                <img className="card-like-icon" src={heartFill} alt="Logo" />
+                <img className="like-icon" src={heartFill} alt="Logo" />
               </button>
             ) : (
               <button className="likeBtn" onClick={(e) => handleLike(e)}>
-                <img className="card-like-icon empty" src={heartOutline} alt="Logo" />
+                <img className="like-icon empty" src={heartOutline} alt="Logo" />
               </button>
             )}
         </div>

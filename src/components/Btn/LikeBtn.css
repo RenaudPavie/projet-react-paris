@@ -1,0 +1,12 @@
+.likeBtn {
+	background-color: inherit;
+	border:none;
+	cursor: pointer;
+}
+.like-icon {
+	height: 30px;
+}
+.like-icon.empty:hover {
+	background-image: url('../../assets/heart-fill.png');
+	background-size: 100%;
+}
