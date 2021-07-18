@@ -26,7 +26,6 @@ function Event() {
                 <div>
                     <div className="eventHeader">    
                         <h1 className="title">{event.record.fields.title}</h1>
-                        <LikeBtn id={params.id}/>
                     </div>
                     <div className="eventRow">
                         <div className="left">
@@ -42,6 +41,10 @@ function Event() {
                         }}></p>
                         </div>
                         <div className="right">
+                            <div className="box fav">
+                                <h3>Ajouter aux favoris</h3>
+                                <LikeBtn id={params.id}/>
+                            </div>
                             {event.record.fields.date_description && (
                                 <div className="box">
                                     <h3>Date</h3>
@@ -108,24 +111,26 @@ function Event() {
                                         </a>
                                     )}
                                 </div>
-                            </div>
-                            <div className="box ">
-                                <MapContainer 
-                                    style={{height : '200px', width : '100%', marginBottom : '15px'}}
-                                    center={[event.record.fields.lat_lon.lat, event.record.fields.lat_lon.lon]} 
-                                    zoom={14} 
-                                    scrollWheelZoom={false}
-                                >
-                                    <TileLayer
-                                        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                                    />
-                                    <Marker position={[event.record.fields.lat_lon.lat, event.record.fields.lat_lon.lon]}>
-                                        <Popup>
-                                            <p>{event.record.fields.address_name},<br />{event.record.fields.address_street},<br />{event.record.fields.address_zipcode} {event.record.fields.address_city}</p>
-                                        </Popup>
-                                    </Marker>
-                                </MapContainer>
+                            {event.record.fields.lat_lon && (
+                                <div className="box ">
+                                    <MapContainer 
+                                        style={{height : '200px', width : '100%', marginBottom : '15px'}}
+                                        center={[event.record.fields.lat_lon.lat, event.record.fields.lat_lon.lon]} 
+                                        zoom={14} 
+                                        scrollWheelZoom={false}
+                                    >
+                                        <TileLayer
+                                            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                                        />
+                                        <Marker position={[event.record.fields.lat_lon.lat, event.record.fields.lat_lon.lon]}>
+                                            <Popup>
+                                                <p>{event.record.fields.address_name},<br />{event.record.fields.address_street},<br />{event.record.fields.address_zipcode} {event.record.fields.address_city}</p>
+                                            </Popup>
+                                        </Marker>
+                                    </MapContainer>
+                                </div>
+                            )}
                             </div>
                         </div>
                     </div>

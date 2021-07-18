@@ -5,7 +5,8 @@ import './LikeBtn.css'
 
 const idList = JSON.parse(localStorage.getItem("LikedEvents")) || [];
 
-function LikeBtn(props) {
+function LikeBtn(props) 
+{
     const [isLiked, setIsLiked] = useState(false);
     const id = props.id;
 

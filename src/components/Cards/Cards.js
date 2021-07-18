@@ -19,7 +19,10 @@ function Card(props) {
           <div className="card-date">
             <Moment date={newDate} format="DD/MM/YYYY [à] hh:mm"/>
           </div>
-          <div className="card-text">{props.description.replace(/(<([^>]+)>)/gi, "")}</div>
+          <div className="card-text"
+          dangerouslySetInnerHTML={{
+            __html: props.description
+        }}></div>
         </div>
       </div>
     </Link>

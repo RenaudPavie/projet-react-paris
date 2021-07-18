@@ -87,6 +87,7 @@ h2.title::after {
 }
 .right {
   width: 300px;
+  height: fit-content;
   padding: 0 15px;
   margin-left: 15px;
   margin-bottom: 50px;
@@ -94,7 +95,9 @@ h2.title::after {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
+  position: sticky;
+  top: 15px;
 }
 .eventHeader {
   width: 100%;
@@ -121,6 +124,10 @@ h2.title::after {
 .box.contact {
   word-break: break-all;
   white-space: normal;
+}
+.box.fav > div {
+  display: flex;
+  justify-content: center;
 }
 .box h3 {
   position: relative;
