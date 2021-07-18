@@ -2,6 +2,11 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import LikeBtn from "../components/Btn/LikeBtn";
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
+import fbIcon from '../assets/facebook.svg'
+import twitterIcon from '../assets/twitter.svg'
+import wwwIcon from '../assets/www.svg'
+import emailIcon from '../assets/email.svg'
+import phoneIcon from '../assets/phone.svg'
 
 function Event() {
     const params = useParams();
@@ -10,7 +15,9 @@ function Event() {
     useEffect(() => {
         fetch(`https://opendata.paris.fr/api/v2/catalog/datasets/que-faire-a-paris-/records/${id}`)
         .then((res) => res.json())
-        .then((data) => setEvent(data));
+        .then((data) => {
+            console.log(data)
+            setEvent(data)});
     }, [id]);
 
     return (
@@ -29,13 +36,20 @@ function Event() {
                                     alt={event.record.fields.cover_alt}
                                 />
                             </div>
-                        <p className="eventDescription">{event.record.fields.description.replace(/(<([^>]+)>)/gi, "")}</p>
+                        <p className="eventDescription"
+                        dangerouslySetInnerHTML={{
+                            __html: event.record.fields.description
+                        }}></p>
                         </div>
                         <div className="right">
                             {event.record.fields.date_description && (
                                 <div className="box">
                                     <h3>Date</h3>
-                                    <p>{event.record.fields.date_description}</p>
+                                    <p
+                                    dangerouslySetInnerHTML={{
+                                        __html: event.record.fields.date_description
+                                    }}
+                                    ></p>
                                 </div>
                             )}
                             {event.record.fields.price_detail && (
@@ -61,26 +75,39 @@ function Event() {
                                 {event.record.fields.contact_name && (
                                     <p>{event.record.fields.contact_name}</p>
                                 )}
+                                {event.record.fields.contact_phone && (
+                                    <p>{event.record.fields.contact_phone}</p>
+                                )}
                                 {event.record.fields.contact_mail && (
-                                    <p>
-                                        <a href={`mailto:${event.record.fields.contact_mail}`}>{event.record.fields.contact_mail}</a>
-                                    </p>
+                                    <p>{event.record.fields.contact_mail}</p>
                                 )}
-                                {event.record.fields.contact_facebook && (
-                                    <p>
-                                        <a href={event.record.fields.contact_facebook}>{event.record.fields.contact_facebook}</a>
-                                    </p>
-                                )}
-                                {event.record.fields.contact_twitter && (
-                                     <p>
-                                        <a href={event.record.fields.contact_twitter}>{event.record.fields.contact_twitter}</a>
-                                    </p>
-                                )}
-                                {event.record.fields.contact_url && (
-                                    <p>
-                                        <a href={event.record.fields.contact_url}>{event.record.fields.contact_url}</a>
-                                    </p>
-                                )}
+                                <div className="contact-icon">
+                                    {event.record.fields.contact_mail && (
+                                        <a href={`mailto:${event.record.fields.contact_mail}`}>
+                                            <img className="like-icon" src={emailIcon} alt="Logo" />
+                                        </a>
+                                    )}
+                                    {event.record.fields.contact_phone && (
+                                        <a href={`tel:${event.record.fields.contact_phone}`}>
+                                            <img className="like-icon" src={phoneIcon} alt="Logo" />
+                                        </a>
+                                    )}
+                                    {event.record.fields.contact_facebook && (
+                                        <a href={event.record.fields.contact_facebook}>
+                                            <img className="like-icon" src={fbIcon} alt="Logo" />
+                                        </a>
+                                    )}
+                                    {event.record.fields.contact_twitter && (
+                                        <a href={event.record.fields.contact_twitter}>
+                                            <img className="like-icon" src={twitterIcon} alt="Logo" />
+                                        </a>
+                                    )}
+                                    {event.record.fields.contact_url && (
+                                        <a href={event.record.fields.contact_url}>
+                                            <img className="like-icon" src={wwwIcon} alt="Logo" />
+                                        </a>
+                                    )}
+                                </div>
                             </div>
                             <div className="box ">
                                 <MapContainer 
@@ -95,7 +122,7 @@ function Event() {
                                     />
                                     <Marker position={[event.record.fields.lat_lon.lat, event.record.fields.lat_lon.lon]}>
                                         <Popup>
-                                            A pretty CSS3 popup. <br /> Easily customizable.
+                                            <p>{event.record.fields.address_name},<br />{event.record.fields.address_street},<br />{event.record.fields.address_zipcode} {event.record.fields.address_city}</p>
                                         </Popup>
                                     </Marker>
                                 </MapContainer>
